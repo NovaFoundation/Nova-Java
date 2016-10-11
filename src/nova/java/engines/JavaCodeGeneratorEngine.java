@@ -5,7 +5,11 @@ import net.fathomsoft.nova.Nova;
 import net.fathomsoft.nova.error.SyntaxMessage;
 import net.fathomsoft.nova.tree.*;
 
+import java.io.File;
+import java.io.IOException;
+
 import static net.fathomsoft.nova.Nova.*;
+import static nova.java.nodewriters.Writer.getWriter;
 
 public class JavaCodeGeneratorEngine extends CodeGeneratorEngine
 {
@@ -22,7 +26,20 @@ public class JavaCodeGeneratorEngine extends CodeGeneratorEngine
 	 */
 	public void generateOutput()
 	{
-		
+		tree.getRoot().forEachVisibleListChild(file -> {
+			try
+			{
+				File outputDir = getOutputDirectory(file);
+				
+				new File(outputDir, file.getPackage().getLocation()).mkdirs();
+				
+				writeFile(file.getPackage().getLocation() + "/" + getWriter(file).writeName(), outputDir, formatText(getWriter(file).write().toString()));
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	public void formatOutput()

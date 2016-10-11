@@ -6,5 +6,9 @@ public abstract class MethodDeclarationWriter extends InstanceDeclarationWriter
 {
 	public abstract MethodDeclaration node();
 	
-	
+	@Override
+	public StringBuilder write(StringBuilder builder)
+	{
+		return builder;
+	}
 }

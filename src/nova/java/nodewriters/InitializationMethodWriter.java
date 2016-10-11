@@ -6,5 +6,9 @@ public abstract class InitializationMethodWriter extends BodyMethodDeclarationWr
 {
 	public abstract InitializationMethod node();
 	
-	
+	@Override
+	public StringBuilder writeName(StringBuilder builder)
+	{
+		return builder.append("init");
+	}
 }
