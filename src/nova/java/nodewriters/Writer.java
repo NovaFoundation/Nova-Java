@@ -4,6 +4,7 @@ import net.fathomsoft.nova.tree.*;
 import net.fathomsoft.nova.tree.Package;
 import net.fathomsoft.nova.tree.annotations.Annotation;
 import net.fathomsoft.nova.tree.exceptionhandling.*;
+import net.fathomsoft.nova.tree.generics.GenericTypeArgument;
 import net.fathomsoft.nova.tree.lambda.LambdaMethodDeclaration;
 import net.fathomsoft.nova.tree.match.*;
 import net.fathomsoft.nova.tree.variables.*;
@@ -20,6 +21,17 @@ public class Writer
 				public Annotation node()
 				{
 					return (Annotation)node;
+				}
+			};
+		}
+		else if (node instanceof GenericTypeArgument)
+		{
+			return new GenericTypeArgumentWriter()
+			{
+				@Override
+				public GenericTypeArgument node()
+				{
+					return (GenericTypeArgument)node;
 				}
 			};
 		}
