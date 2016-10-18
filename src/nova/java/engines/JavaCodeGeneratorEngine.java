@@ -40,6 +40,52 @@ public class JavaCodeGeneratorEngine extends CodeGeneratorEngine
 				e.printStackTrace();
 			}
 		});
+
+		StringBuilder builder = new StringBuilder();
+		builder.append("public class NovaUtilities\n{\n");
+		
+		int count = 20;
+		
+		for (int i = 0; i < count + 1; i++)
+		{
+			builder.append("@FunctionalInterface\n");
+			builder.append("public static interface Function").append(count - i).append("<");
+
+			for (int n = i; n < count + 1; n++)
+			{
+				if (n > i)
+				{
+					builder.append(", ");
+				}
+				
+				builder.append("T").append(n - i);
+			}
+			
+			builder.append(">\n{\n");
+			builder.append("T").append(count - i).append(" call(");
+			
+			for (int n = i; n < count; n++)
+			{
+				if (n > i)
+				{
+					builder.append(", ");
+				}
+				
+				builder.append("T").append(n - i).append(" t").append(n - i);
+			}
+			
+			builder.append(");");
+			builder.append("\n}\n");
+		}
+		
+		try
+		{
+			writeFile("NovaUtilities.java", controller.targetEngineWorkingDir, builder.toString());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void formatOutput()
