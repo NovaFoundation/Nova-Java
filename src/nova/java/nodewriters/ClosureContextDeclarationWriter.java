@@ -6,5 +6,9 @@ public abstract class ClosureContextDeclarationWriter extends LocalDeclarationWr
 {
 	public abstract ClosureContextDeclaration node();
 	
-	
+	@Override
+	public StringBuilder write(StringBuilder builder)
+	{
+		return builder;
+	}
 }
