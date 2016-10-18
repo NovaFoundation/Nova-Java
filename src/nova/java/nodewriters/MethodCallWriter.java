@@ -20,6 +20,13 @@ public abstract class MethodCallWriter extends VariableWriter
 	@Override
 	public StringBuilder writeUseExpression(StringBuilder builder)
 	{
-		return writeName(builder).append(getWriter(node().getArgumentList()).write());
+		writeName(builder);
+		
+		if (node().getCallableDeclaration() instanceof ClosureDeclaration)
+		{
+			builder.append(".call");
+		}
+		
+		return getWriter(node().getArgumentList()).write(builder);
 	}
 }
